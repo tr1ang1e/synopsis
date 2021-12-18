@@ -8,7 +8,7 @@ except='~'                                 # prevent copying of opened files
 # 'sed' so we have only the last commit
 lastcommit=`git log --date=format:"%Y%m%d%H%M" --pretty=format:"%ad" | sed -n 1p`
 
-# copy files were changed till last commit
+# copy files were modified till last commit
 for name in $from$mask
 do
   lastchange=`date -r "$name" +%Y%m%d%H%M`
@@ -21,15 +21,18 @@ do
   fi
 done
 
+# add to git this script if modified till last commit
 if [ `date -r $0 +%Y%m%d%H%M` -gt $lastcommit ]
 then
   git add $0
   echo + $0
 fi
 
+# check if any files modified >> commit, push
 ch=`git status | grep modified`
 if [ "$ch" ]
 then
-  git commit -m "x"
+  git commit -m "x"    # no sence
   git push
 fi
+
