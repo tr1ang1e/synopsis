@@ -14,14 +14,15 @@ do
   newname="`basename "$name"`"
   if [ ${newname:0:1} != $except ] && [ $lastchange -gt $lastcommit ] 
   then
-    echo "$newname" "$lastchange" # "$lastcommit"
-  #   cp "$name" "$to$newname"
-  #   git add "$to$newname"
+    cp "$name" "$to$newname"
+    git add "$to$newname"
   fi
 done
 
 ch=`git status | grep modified`
 if [ "$ch" ]
 then
-  echo $ch
+  git add $0
+  git commit -m "x"
+  git push
 fi
