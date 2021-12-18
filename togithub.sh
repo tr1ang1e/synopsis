@@ -35,4 +35,3 @@ then
   git commit -m "x"    # no sence
   git push
 fi
-
