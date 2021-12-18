@@ -29,8 +29,8 @@ then
 fi
 
 # check if any files modified >> commit, push
-ch=`git status | grep modified`
-if [ "$ch" ]
+changes=`git status | grep modified`
+if [ "$changes" ]
 then
   git commit -m "x"    # no sence
   git push
