@@ -7,17 +7,26 @@ from=/media/sf_COMMON_coding/__synopsis/   # copy from path
 to=./                                      # copy to path
 mask=*                                     # filename mask
 except='~'                                 # prevent copying of opened files
-hidden='.'
 
 # 'sed' so we have only the last commit
 lastcommit=`git log --date=format:"%Y%m%d%H%M" --pretty=format:"%ad" | sed -n 1p`
 
-# [add dealing with deleted from source directory files]
-for name in ./*
+# dealing with deleted from source directory files
+index=0
+while read line; do
+    array[$index]="$line"
+    index=$(($index+1))
+done < <(ls | grep -v -E '.*\.sh$')
+
+for ((a=0; a < ${#array[*]}; a++))
 do
-  if [ -f "$from$name"  ] && [ ${name:0:1} != $hidden ] 
+  if [ ! -f "$from${array[$a]}"  ]
   then
-    echo "$name"  
+    rm "$to${array[$a]}"
+    if git add "${array[$a]}"
+    then
+      echo - "${array[$a]}"
+    fi
   fi
 done
 
