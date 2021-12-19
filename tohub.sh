@@ -52,7 +52,7 @@ then
 fi
 
 # check if any files modified >> commit, push
-changes=`git status | grep -P 'modified|deleted'`
+changes=`git status | grep modified`
 if [ "$changes" ]
 then
   git commit -m "x"    # no sence
