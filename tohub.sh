@@ -7,11 +7,19 @@ from=/media/sf_COMMON_coding/__synopsis/   # copy from path
 to=./                                      # copy to path
 mask=*                                     # filename mask
 except='~'                                 # prevent copying of opened files
+hidden='.'
 
 # 'sed' so we have only the last commit
 lastcommit=`git log --date=format:"%Y%m%d%H%M" --pretty=format:"%ad" | sed -n 1p`
 
 # [add dealing with deleted from source directory files]
+for name in ./*
+do
+  if [ -f "$from$name"  ] && [ ${name:0:1} != $hidden ] 
+  then
+    echo "$name"  
+  fi
+done
 
 # copy files were modified till last commit
 for name in $from$mask
