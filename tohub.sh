@@ -11,19 +11,20 @@ except='~'                                 # prevent copying of opened files
 # 'sed' so we have only the last commit
 lastcommit=`git log --date=format:"%Y%m%d%H%M" --pretty=format:"%ad" | sed -n 1p`
 
-# dealing with deleted from source directory files
+# add files names from 'to' to the array
 index=0
 while read line; do
     array[$index]="$line"
     index=$(($index+1))
 done < <(ls | grep -v -E '.*\.sh$')
 
+# if any file doesn't exist anymore
 for ((a=0; a < ${#array[*]}; a++))
 do
   if [ ! -f "$from${array[$a]}"  ]
   then
     rm "$to${array[$a]}"
-    if git add "${array[$a]}"
+    if git add "${array[$a]}"     # if git add succeed
     then
       echo - "${array[$a]}"
     fi
