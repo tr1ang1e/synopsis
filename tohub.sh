@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# add >> commit >>  push
+# add >> commit >> push
 # only copied files or modified script 
 
 from=/media/sf_COMMON_coding/__synopsis/   # copy from path
