@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# add >> commit >> push
-# only copied files or modified script 
+# synchronize >> git add + commit + push
+# only modified files or modified script 
+# new and deleted files are just added to an index
 
 from=/media/sf_COMMON_coding/__synopsis/   # copy from path
 to=./                                      # copy to path
@@ -24,7 +25,7 @@ do
   if [ ! -f "$from${array[$a]}"  ]
   then
     rm "$to${array[$a]}"
-    if git add "${array[$a]}"     # if git add succeed
+    if git add "${array[$a]}"   # if git add succeed (just 'if' example)
     then
       echo - "${array[$a]}"
     fi
