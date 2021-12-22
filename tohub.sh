@@ -43,7 +43,7 @@ repeat()
     newname="`basename "$name"`"
     if [ ${newname:0:1} != $except ] && [ $lastchange -gt $lastcommit ] 
     then
-      cp "$name" "$to$newname"    # copy
+      cp "$name" "$to$newname" 2> /dev/null   # copy
       git add "$to$newname"       # immediately add to git
       echo + "`basename "$name"`"  
     fi
