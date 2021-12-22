@@ -54,7 +54,7 @@ repeat()
 repeat
 
 # processing .pdf files
-rm -r "$oldpdf"
+rm -r "./$oldpdf"
 cp -r "$from$newpdf" .
 git add "$oldpdf"
 git add "$newpdf"
