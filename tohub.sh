@@ -54,10 +54,10 @@ repeat()
 repeat
 
 # processing .pdf files
-rm -r "./$oldpdf"
-cp -r "$from$newpdf" .
-git add "$oldpdf"
-git add "$newpdf"
+# rm -r "./$oldpdf"
+# cp -r "$from$newpdf" .
+# git add "$oldpdf"
+# git add "$newpdf"
 
 # add to git this script if modified till last commit
 if [ `date -r $0 +%Y%m%d%H%M` -gt $lastcommit ]
