@@ -6,6 +6,8 @@
 
 from=/media/sf_COMMON_coding/__synopsis/   # copy from path
 to=./                                      # copy to path
+oldpdf="pdf"                               # to remove before copiyng
+newpdf="pdf"                              # new remote path and new dir name here
 mask=*                                     # filename mask
 except='~'                                 # prevent copying of opened files
 
@@ -48,8 +50,14 @@ repeat()
   done
 }
 
+# processing .docx files
 repeat
-echo MASSAGE
+
+# processing .pdf files
+rm -r "$oldpdf"
+cp -r "$from$newpdf" .
+git add "$oldpdf"
+git add "$newpdf"
 
 # add to git this script if modified till last commit
 if [ `date -r $0 +%Y%m%d%H%M` -gt $lastcommit ]
